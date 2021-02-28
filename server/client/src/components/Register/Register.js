@@ -1,22 +1,23 @@
 import React, { useContext, useState } from 'react';
-import { TextField, Button,makeStyles } from '@material-ui/core'
+import { TextField, Button, makeStyles } from '@material-ui/core'
 import { Form, useForms } from '../Controls/Form'
 import { Controls } from '../Controls/Controls'
 import axios from 'axios'
 import { AuthContext } from '../../Contexts/Authentication/AuthContext';
 import { register } from '../../Services/Api/postMethodCalls';
+import Header from '../Home/Header';
 
 
-const useStyles=makeStyles(theme=>({
-  root:{
-  
-    width:'410px',
-    margin:'auto',
-    marginTop:'1%',
-    border:'solid',
-    borderRadius:theme.spacing(2),
-    padding:theme.spacing(4)
-    
+const useStyles = makeStyles(theme => ({
+  root: {
+
+    width: '410px',
+    margin: 'auto',
+    marginTop: '1%',
+    border: 'solid',
+    borderRadius: theme.spacing(2),
+    padding: theme.spacing(4)
+
 
   }
 }))
@@ -44,7 +45,7 @@ const departmentOptions = [
 const Register = (props) => {
   const { values, setValues, errors, setErrors, handleChange } = useForms(initialFieldValues)
   const { authDetails, dispatchAuthDetails } = useContext(AuthContext)
-const classes=useStyles()
+  const classes = useStyles()
 
 
   const validate = () => {
@@ -75,63 +76,67 @@ const classes=useStyles()
   }
 
   return (
-<div className={classes.root}>
-    <Form>
-      <Controls.Input
-        name="name"
-        value={values.name}
-        label="Name"
-        onChange={handleChange}
-        error={errors.name}
-      />
-      <Controls.Input
-        name="email"
-        value={values.email}
-        label="Email"
-        onChange={handleChange}
-        error={errors.email}
-      />
-      <Controls.Input
-        name="password"
-        value={values.password}
-        label="Password"
-        onChange={handleChange}
-        error={errors.password}
-        type="password"
-      />
-      <Controls.Input
-        name="region"
-        value={values.region}
-        label="Region"
-        onChange={handleChange}
-        error={errors.region}
-      />
-      <Controls.RadioButton
-        name="role"
-        value={values.role}
-        label="Role"
-        onChange={handleChange}
-        options={roleOptions}
-      />
+    <>
+      <Header title="Register Officer"></Header>
 
-      <Controls.Select
-        name="department"
-        value={values.department}
-        label="Department"
-        onChange={handleChange}
-        options={departmentOptions}
-        error={errors.department}
-      />
+      <div className={classes.root}>
+        <Form>
+          <Controls.Input
+            name="name"
+            value={values.name}
+            label="Name"
+            onChange={handleChange}
+            error={errors.name}
+          />
+          <Controls.Input
+            name="email"
+            value={values.email}
+            label="Email"
+            onChange={handleChange}
+            error={errors.email}
+          />
+          <Controls.Input
+            name="password"
+            value={values.password}
+            label="Password"
+            onChange={handleChange}
+            error={errors.password}
+            type="password"
+          />
+          <Controls.Input
+            name="region"
+            value={values.region}
+            label="Region"
+            onChange={handleChange}
+            error={errors.region}
+          />
+          <Controls.RadioButton
+            name="role"
+            value={values.role}
+            label="Role"
+            onChange={handleChange}
+            options={roleOptions}
+          />
 
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleuSbmit}
-      >
-        Register
+          <Controls.Select
+            name="department"
+            value={values.department}
+            label="Department"
+            onChange={handleChange}
+            options={departmentOptions}
+            error={errors.department}
+          />
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleuSbmit}
+          >
+            Register
       </Button>
-    </Form>
-    </div>
+        </Form>
+      </div>
+    </>
   );
 };
 
