@@ -9,7 +9,8 @@ import Map from './components/Complaints/UserComplaints/map'
 // import ShowComplainsTable from './components/Complaints/ShowComplaints/ShowsTable'
 import ProgressChart from './components/Stats/ProgressChart'
 import Upvote from './components/Complaints/Upvote/Upvote'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { HashRouter, Switch, Route,BrowserRouter as Router } from 'react-router-dom'
+// import { browserHistory, Router, Route, IndexRoute } from 'react-router'
 import Register from './components/Register/Register'
 import Expt from './components/Complaints/ShowComplaints/ShowComplaintsTable'
 import ComplainContextProvider from './Contexts/Complains/complainsContext'
@@ -20,15 +21,22 @@ function App() {
     <div className="App">
       <AuthContextProvider>
       <ComplainContextProvider>
-        <BrowserRouter>
-          <Switch>
+      {/* <Router history={browserHistory}> */}
+        {/* <HashRouter> */}
+        
+          {/* <Switch> */}
+          <Router>
             <Route exact path="/" component={Home}></Route>     
             <Route path="/viewComplains" component={Expt}></Route>
             <Route path="/lodgeComplain" component={Complaint}></Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/getComplain" component={ProvideUpdate}></Route>
-          </Switch>
-        </BrowserRouter>
+            </Router>
+          {/* </Switch> */}
+
+          
+        {/* </HashRouter> */}
+        {/* </Router> */}
       </ComplainContextProvider>
       </AuthContextProvider>
 

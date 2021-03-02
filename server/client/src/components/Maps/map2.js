@@ -24,7 +24,7 @@ class Map extends Component {
 
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(this.successLocation, this.erroorLocation, { enableHighAccuracy: true })
+    // navigator.geolocation.getCurrentPosition(this.successLocation, this.erroorLocation, { enableHighAccuracy: true })
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
