@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+// import Worker from "worker-loader!./Worker.js";
 
-
-
-
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 mapboxgl.accessToken = 'pk.eyJ1IjoicmFjaG5hZGV2cyIsImEiOiJja2t4azQ1NTMya3I4Mm9zMWF3encxZmVpIn0.rrFsJ2qtgCWXXMSz4PAw-A';
 
 
@@ -15,16 +15,30 @@ class Map extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {
+    // this.state = {
+    //   lng: 73.98,
+    //   lat: 15.21,
+    //   zoom: 14
+    // };
+    this.initialState={
       lng: 73.98,
       lat: 15.21,
       zoom: 14
-    };
+    }
+    console.log(this.props.coordinates);
+    if (this.props.coordinates){
+      this.state=this.props.coordinates
+    }
+    else{
+      this.state=this.initialState
+    }
+    console.log(this.state);
   }
 
 
   componentDidMount() {
     // navigator.geolocation.getCurrentPosition(this.successLocation, this.erroorLocation, { enableHighAccuracy: true })
+    console.log(this.state);
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -32,12 +46,12 @@ class Map extends Component {
       zoom: this.state.zoom
     });
 
-    map.addControl(
-      new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl
-      })
-      );
+    // map.addControl(
+    //   new MapboxGeocoder({
+    //   accessToken: mapboxgl.accessToken,
+    //   mapboxgl: mapboxgl
+    //   })
+    //   );
 
     const marker = new mapboxgl.Marker({
       draggable: true
@@ -69,6 +83,7 @@ class Map extends Component {
     }
     marker.on('dragend', onDragEnd);
 
+    console.log(map);
     // var coordinates = document.getElementById('coordinates');
   }
    successLocation = (position) => {

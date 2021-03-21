@@ -5,36 +5,37 @@ import Complaint from './components/Complaints/UserComplaints/UserComplaintForm'
 import Home from './components/Home/Home';
 import Login from './components/Login/Login'
 import ProvideUpdate from './components/Complaints/ProvideUpdate/ProvideUpdateContainer'
-import Map from './components/Complaints/UserComplaints/map'
+// import Map from './components/Complaints/UserComplaints/map'
 // import ShowComplainsTable from './components/Complaints/ShowComplaints/ShowsTable'
-import ProgressChart from './components/Stats/ProgressChart'
-import Upvote from './components/Complaints/Upvote/Upvote'
+// import ProgressChart from './components/Stats/ProgressChart'
+// import Upvote from './components/Complaints/Upvote/Upvote'
 import { HashRouter, Switch, Route,BrowserRouter as Router } from 'react-router-dom'
 // import { browserHistory, Router, Route, IndexRoute } from 'react-router'
 import Register from './components/Register/Register'
-import Expt from './components/Complaints/ShowComplaints/ShowComplaintsTable'
+import ShowComplaintsTable from './components/Complaints/ShowComplaints/ShowComplaintsTable'
 import ComplainContextProvider from './Contexts/Complains/complainsContext'
 import ComplainHistory from './components/Complaints/ShowComplaints/ShowComplaintHistory'
 import AuthContextProvider from './Contexts/Authentication/AuthContext'
+import Maps from './components/Maps/Map1';
 function App() {
   return (
     <div className="App">
       <AuthContextProvider>
       <ComplainContextProvider>
-      {/* <Router history={browserHistory}> */}
+      {/* <Router history={browserHistory}>  */}
         {/* <HashRouter> */}
-        
-          {/* <Switch> */}
-          <Router>
+        <Router>
+         <Switch>
+          
             <Route exact path="/" component={Home}></Route>     
-            <Route path="/viewComplains" component={Expt}></Route>
+            <Route path="/viewComplains" component={ShowComplaintsTable}></Route>
             <Route path="/lodgeComplain" component={Complaint}></Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/getComplain" component={ProvideUpdate}></Route>
-            </Router>
-          {/* </Switch> */}
+           
+          </Switch>
 
-          
+          </Router> 
         {/* </HashRouter> */}
         {/* </Router> */}
       </ComplainContextProvider>
@@ -64,7 +65,7 @@ function App() {
       y: [12, 5, 3, 8],
      }}/> */}
 
-     
+     {/* <Maps/> */}
     </div>
   );
 }

@@ -32,19 +32,20 @@ const headCells = [
   { id: 'upvote', label: 'Upvotes' },
   { id: 'description', label: 'Description' },
   { id: 'status', label: 'Status' },
+  { id: 'locality', label: 'Locality' },
   { id: 'action', label: 'Action' }
 
   // { id: 'department', label: 'Department', disableSorting: true },
 ]
 
 
-const Expt = (props) => {
+const ShowComplaintsTable = (props) => {
   const classes=useStyles()
   const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
   const { complains, dispatchComplains } = useContext(ComplainContext)
   const {authState}=useContext(AuthContext)
   const [editComplaint, setEditComplaint] = useState(null)
-
+  const [loading,setLoading]=useState(true)
   const { TableContainer, TableHeader, TablePagenations, recordsAfterPagingAndSorting } = useTable(complains, headCells, filterFn)
 
   useEffect(() => {
@@ -53,6 +54,7 @@ const Expt = (props) => {
         console.log(authState);
         if (res)
         dispatchComplains({ type: 'FETCH_ALL_COMPLAINS', payload: res })
+       setLoading(false)
       }).catch(err => {
         console.log(err);
       })
@@ -80,7 +82,6 @@ const Expt = (props) => {
   }
 
   const handleClick = (record) => {
-    console.log('i am cliekced', record);
     props.history.push({
       pathname: '/getComplain',
       state: { complainDetails: record }
@@ -105,7 +106,7 @@ const Expt = (props) => {
       <TableContainer>
         <TableHeader />
         <TableBody>
-          {complains && recordsAfterPagingAndSorting().map((record, index) => (
+          {!loading && complains && recordsAfterPagingAndSorting().map((record, index) => (
             <TableRow key={index}>
               <TableCell>
                 {(record._id).toUpperCase()}
@@ -123,8 +124,11 @@ const Expt = (props) => {
                 {record.status}
               </TableCell>
               <TableCell>
+                {record.locality}
+              </TableCell>
+              <TableCell>
                 <Button variant="contained" color="primary" onClick={() => handleClick(record)}>
-                  {/* Take Action */}
+                  
                   {authState==='NOT_LOGGED_IN'?'View Details':'Take Action'}
                 </Button>
               </TableCell>
@@ -157,4 +161,4 @@ const Expt = (props) => {
   );
 };
 
-export default Expt;
+export default ShowComplaintsTable;

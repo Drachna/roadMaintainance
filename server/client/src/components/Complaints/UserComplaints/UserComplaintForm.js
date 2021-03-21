@@ -1,19 +1,19 @@
-import React, { useContext } from 'react';
-import { Button, Grid, makeStyles } from '@material-ui/core'
+import React, { useContext, useState } from 'react';
+import { Button, Grid, makeStyles, Paper } from '@material-ui/core'
 import { Form, useForms } from '../../Controls/Form'
 import { Controls } from '../../Controls/Controls'
 import './complainStyles.css'
 import mapboxgl from 'mapbox-gl';
 import Map from '../../Maps/map2'
 import Header from '../../Home/Header'
-
+import Notification from '../../Controls/Notification'
 import { ComplainContext } from '../../../Contexts/Complains/complainsContext';
 import { createComplain } from '../../../Services/Api/postComplains'
 
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // marginTop:theme.spacing(8),
+    marginTop:theme.spacing(5),
     padding: theme.spacing(4),
     // border:'solid',
     '& .MuiGrid-item': {
@@ -51,10 +51,11 @@ const severityOption = [
 ]
 
 
-export default function Complaint() {
+export default function Complaint(props) {
   const classes = useStyles()
   const { values, setValues, errors, setErrors, handleChange } = useForms(initialFieldValues)
   // const [values, setValues] = useState(initialFieldValues)
+  const [notify,setNotify]=useState({isOpen:false,message:'',type:''})
   const { dispatchComplains } = useContext(ComplainContext)
 
   const validate = () => {
@@ -100,8 +101,32 @@ export default function Complaint() {
       formData.append('imageToAdd', values.imageToAdd)
       formData.append('lat', values.lat)
       formData.append('lng', values.lng)
-      const complain = await createComplain(formData)
-      dispatchComplains({ type: 'ADD_COMPLAIN', payload: complain })
+      // const complain = await createComplain(formData)
+      createComplain(formData).then(res=>{
+        // console.log(res);
+       if (res.response){
+         console.log(res.response);
+         console.log(res.message);
+         setNotify({
+          isOpen:true,
+          message:res.message,
+          type:'error'
+        })
+       }
+       else{
+        dispatchComplains({ type: 'ADD_COMPLAIN', payload: res.data })
+        setNotify({
+          isOpen:true,
+          message:'Complaint Registered Successfully',
+          type:'success'
+        })
+        setValues(initialFieldValues)
+        setTimeout(()=>props.history.push('/viewComplains'),3000)
+
+       }
+      })
+      
+      
     }
   }
 
@@ -114,7 +139,7 @@ export default function Complaint() {
       <Grid container className={classes.root} spacing={3}>
 
         <Grid className={classes.formArea} align="center" item md={6} >
-          <Form>
+          <Form align="center">
             <Controls.Input
               name="name"
               label="Name"
@@ -186,8 +211,9 @@ export default function Complaint() {
         </Grid>
         <Grid item md={6} >
           <Map setLatLng={setLatLng} />
-        </Grid>
-        {/* <Grid item md ></Grid> */}
+        </Grid>        
+
+        <Notification notify={notify} setNotify={setNotify}></Notification>
       </Grid>
 
     </>

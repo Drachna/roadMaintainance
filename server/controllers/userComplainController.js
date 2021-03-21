@@ -35,11 +35,12 @@ module.exports.createComplain = async (req, res) => {
         } catch (error) {
      
           const errors = mongooseErrorFormatter(error)
-          res.status(400).json(errors)
+          console.log(errors);
+         return res.status(400).json(error)
         }
 
 
-        res.status(200).json(complain)
+        return res.status(200).json(complain)
       }
     });
 

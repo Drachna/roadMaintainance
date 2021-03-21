@@ -41,6 +41,11 @@ function ProvideUpdate(props) {
   const classes = useStyles()
   const { complainDetails } = props.location.state
   const { authState } = useContext(AuthContext)
+  const coordinates={
+    lng:complainDetails.lng,
+    lat:complainDetails.lat,
+    zoom:14
+  }
 
   return (
     <>
@@ -53,7 +58,7 @@ function ProvideUpdate(props) {
             </Paper>
           </Grid>
           <Grid item md={6}>
-            <Map />
+            <Map coordinates={coordinates}/>
           </Grid>
 
 

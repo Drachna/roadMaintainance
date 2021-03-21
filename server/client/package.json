@@ -26,10 +26,12 @@
     "react-geolocated": "^3.1.0",
     "react-icons": "^4.1.0",
     "react-leaflet": "^3.1.0",
+    "react-map-gl": "^6.1.10",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

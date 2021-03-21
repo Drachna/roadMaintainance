@@ -8,7 +8,9 @@ const complainRoutes=require('./routes/userComplain.route')
 const officerRoutes=require('./routes/officer.route')
 // const actionRoutes=require('./routes/actionTracker.route')
 
-mongoose.connect(process.env.HOST, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+// mongoose.connect(process.env.HOST, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+
+mongoose.connect('mongodb://localhost:27017/roadService', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 
 mongoose.connection.once('open',()=>{
     console.log('connected to mongo');
