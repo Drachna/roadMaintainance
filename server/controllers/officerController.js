@@ -1,59 +1,52 @@
-const mongoose = require('mongoose')
 const Officer = require('../models/Officer.model')
-const jwt=require('jsonwebtoken')
-const mongooseErrorFormatter = require('../utils/validators/mongooseErrorFormator')
-const tokenExpiresIn=1*60*60
+const { createToken, tokenExpiresIn } = require('../utils/tokenGenerator/generateToken')
 
-const createToken=(id)=>{
-  return jwt.sign({id},'secrete',{expiresIn:tokenExpiresIn})
-}
 
 
 module.exports.addOfficer = async (req, res) => {
   try {
-    console.log(req.body);
-    const officer = await new Officer(req.body)
-    officer.save()
-    const token=createToken(officer._id)
-    res.cookie('token',token,{httpOnly:true,maxAge:tokenExpiresIn*1000})
-    res.status(200).json({status:'LoggedIn'})
+      const officer = new Officer(req.body)
+      await officer.save()
+      const token = createToken(officer._id)
+      res.cookie('token', token, { httpOnly: true, maxAge: tokenExpiresIn * 1000 })
+      res.status(201).send({ status: 'LoggedIn' ,message:'Registered successfully!'})
+
   } catch (error) {
-    const errors = mongooseErrorFormatter(error)
-    res.status(400).json(errors)
+    res.status(500).send({message:'Something went wrong while adding the officer'})
   }
 }
 
 module.exports.removeOfficer = async (req, res) => {
   try {
-    const officer = await Officer.deleteOne({ _id: req.params.id })
-    res.send('deleted')
+    await Officer.deleteOne({ _id: req.params.id })
+    res.status(200).send({message:'Deleted Successfully'})
 
   } catch (error) {
-    const errors = mongooseErrorFormatter(error)
-    res.status(400).json(errors)
+    res.status(500).send({message:'Failed to delete the officer'})
   }
 }
 
 module.exports.editOfficerDetails = async (req, res) => {
   try {
     const officer = Officer(req.body)
-    officer.save()
+    await officer.save()
+    res.status(200).send({message: "Officer details are successfully updated"})
   } catch (error) {
-    const errors = mongooseErrorFormatter(error)
-    res.status(400).json(errors)
+    res.status(500).send({message:'Something went wrong while updating the details'})
   }
 }
 
-module.exports.loginOfficer=async(req,res)=>{
+module.exports.loginOfficer = async (req, res) => {
   try {
-    const officer=await Officer.login(req.body.email,req.body.password)
-    const token=createToken(officer._id)
-    res.cookie('token',token,{httpOnly:true,maxAge:tokenExpiresIn*1000})
-    res.status(200).json({status:'LoggedIn'})
+   
+      const officer = await Officer.login(req.body.email, req.body.password)
+      const token = createToken(officer._id)
+      res.cookie('token', token, { httpOnly: true, maxAge: tokenExpiresIn * 1000 })
+      res.status(200).send({ status: 'LoggedIn',message:'Login Successful' })
+ 
   } catch (error) {
-    console.error(error);
-    const errors = mongooseErrorFormatter(error)
-    res.status(400).json(errors)
+    console.log(error);
+    res.status(500).send({message:'Something went wrong'})
   }
 
 }

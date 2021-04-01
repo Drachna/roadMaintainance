@@ -1,20 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { TextField, Button } from '@material-ui/core'
+import {  Button } from '@material-ui/core'
 import {Controls} from '../Controls/Controls'
 import {Form,useForms} from '../Controls/Form'
-import axios from 'axios'
-import { Control } from 'leaflet';
 import { AuthContext } from '../../Contexts/Authentication/AuthContext';
 import { login } from '../../Services/Api/postMethodCalls';
 import { useHistory } from "react-router-dom";
+
 const initialFieldValues = {
   email: '',
   password: ''
 }
 
 const Login = (props) => {
-  // const [values, setValues] = useState(initialFieldValues)
-
   const {values,setValues,errors,setErrors,handleChange}=useForms(initialFieldValues)
   const {authDetails, dispatchAuthDetails}=useContext(AuthContext)
   const history=useHistory()
@@ -34,9 +31,7 @@ const Login = (props) => {
 
     if (validate()){
       const user_status= await login(values)
-      dispatchAuthDetails({type:'LOGIN',payload:user_status})
-      console.log(props);
-    
+      dispatchAuthDetails({type:'LOGIN',payload:user_status})   
       history.push('/viewComplains')
     }
   }
@@ -67,7 +62,6 @@ const Login = (props) => {
       >
         Login
       </Button>
-
     </Form>
   );
 };

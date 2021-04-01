@@ -13,7 +13,7 @@ import { createComplain } from '../../../Services/Api/postComplains'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop:theme.spacing(5),
+    // marginTop:theme.spacing(5),
     padding: theme.spacing(4),
     // border:'solid',
     '& .MuiGrid-item': {
@@ -25,8 +25,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center', // To be vertically aligned
-    border: 'solid',
-    borderRadius: '25px'
+    // border: '1px solid #ccc',
+    borderRadius: '13px'
+  },
+  mapArea:{
+    height:'600px'
   }
 }))
 
@@ -135,11 +138,15 @@ export default function Complaint(props) {
   return (
 
     <>
-      <Header title="Register Complaint" />
+      {/* <Header title="Register Complaint" /> */}
       <Grid container className={classes.root} spacing={3}>
-
-        <Grid className={classes.formArea} align="center" item md={6} >
-          <Form align="center">
+      {/* <Grid item md={12} sm={12}>
+       
+        </Grid> */}
+        <Grid className={classes.formArea} align="center" item md={6} sm={12}>
+         
+          <Form align="center" style={{ border:'1px solid'}}>
+          <Header title="Register Complaint" />
             <Controls.Input
               name="name"
               label="Name"
@@ -181,7 +188,7 @@ export default function Complaint(props) {
               value={values.lng}
               onChange={handleChange}
             />
-
+<br/>
             <Button
               variant="contained"
               component="label"
@@ -209,7 +216,7 @@ export default function Complaint(props) {
           </Form>
 
         </Grid>
-        <Grid item md={6} >
+        <Grid item  md={6} sm={12 } className={classes.mapArea}>
           <Map setLatLng={setLatLng} />
         </Grid>        
 

@@ -3,9 +3,13 @@ import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   root: {
+    // border: '1px solid #ccc',
+    // borderRadius:'13px',
+     
     '& .MuiFormControl-root':{
       width:'80%',
-      margin:'10px'
+      margin:'10px',
+     
     }
     // padding:'4px'
   }

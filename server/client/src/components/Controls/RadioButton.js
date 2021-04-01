@@ -5,16 +5,19 @@ const useStyles=makeStyles({
     // width:'60%',
     margin:'10px',
     // marginLeft:'8px',
-    display:'flex',
-    justifyContent: "space-between",
+    // display:'flex',
+    justifyContent: "center",
+  },
+  label:{
+    textAlign:'left'
   }
 })
 const RadioButton = (props) => {
   const { name, label, value, onChange, options } = props
   const classes=useStyles()
   return (
-    <FormControl className={classes.root} >
-      <FormLabel align="left"> {label}</FormLabel>
+    <FormControl align="center" className={classes.root} >
+      <FormLabel className={classes.label}> {label}</FormLabel>
       <RadioGroup
         row
         name={name}

@@ -1,23 +1,33 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core'
+import {Grid, makeStyles} from '@material-ui/core'
 
 const useStyles=makeStyles({
   root:{
-    // marginTop:'15px',
+    
     background:'black',
+    width:'100%',
     color:'white',
     height:'70px',
-    textAlign:'center',
-    fontSize:'40px'
-
+    // textAlign:'center',
+    fontSize:'29px',
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    borderTopLeftRadius:'13px',
+    borderTopRightRadius:'13px'
+  
   }
 })
 const Header = (props) => {
   const classes=useStyles()
   return (
-    <div className={classes.root}>
+    
+    <Grid container >
+      <Grid item md={12} className={classes.root}>
       {props.title}
-    </div>
+      </Grid>
+     
+    </Grid>
   );
 };
 

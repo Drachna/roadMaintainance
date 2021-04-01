@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import useTable from '../../Controls/Table'
 import { TableBody, TableRow, makeStyles, TableCell, Toolbar, Button, IconButton,
-   Dialog, DialogContent, DialogTitle, Typography } from '@material-ui/core'
+   Dialog, DialogContent, DialogTitle, Typography, Grid } from '@material-ui/core'
 import { RiThumbUpFill } from "react-icons/ri";
 import { Controls } from '../../Controls/Controls'
 import { ComplainContext } from '../../../Contexts/Complains/complainsContext';
@@ -90,6 +90,8 @@ const ShowComplaintsTable = (props) => {
 
   return (
     <>
+    <Grid container>
+      <Grid item xs={12}>
     <Header title=" Complaints List"></Header>
     <div className={classes.container}>
       <Toolbar className={classes.toolbar}>
@@ -157,6 +159,8 @@ const ShowComplaintsTable = (props) => {
       </Dialog>
 
     </div>
+    </Grid>
+    </Grid>
     </>
   );
 };

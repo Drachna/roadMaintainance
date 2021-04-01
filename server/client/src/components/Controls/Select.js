@@ -15,6 +15,7 @@ function Select(props) {
         name={name}
         value={value}
         onChange={onChange}
+        align="left"
       >
         <MenuItem value="" >None </MenuItem>
         {
