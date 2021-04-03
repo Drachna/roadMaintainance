@@ -1,20 +1,17 @@
 import React from 'react';
-import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio ,makeStyles} from '@material-ui/core';
-const useStyles=makeStyles({
-  root:{
-    // width:'60%',
-    margin:'10px',
-    // marginLeft:'8px',
-    // display:'flex',
-    justifyContent: "center",
-  },
-  label:{
-    textAlign:'left'
-  }
-})
+import {
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio
+} from '@material-ui/core';
+import { useStyles } from '../../assets/styles/radioButtonStyles'
+
+
 const RadioButton = (props) => {
   const { name, label, value, onChange, options } = props
-  const classes=useStyles()
+  const classes = useStyles()
   return (
     <FormControl align="center" className={classes.root} >
       <FormLabel className={classes.label}> {label}</FormLabel>

@@ -12,7 +12,6 @@ import moment from 'moment'
 
 const ComplainHistory = (props) => {
   const {actionHistory}=props
-  console.log(actionHistory);
   return (
     <Timeline align="left">
       {actionHistory.map((action,i)=>{

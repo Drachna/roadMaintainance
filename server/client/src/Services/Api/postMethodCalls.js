@@ -15,9 +15,8 @@ export const register = async (data) => {
   return res
 }
 
-
 export const login = async (data) => {
-  const res=postData('/api/officer/loginOfficer',data)
+  const res= postData('/api/officer/loginOfficer',data)
   return res
 }
 

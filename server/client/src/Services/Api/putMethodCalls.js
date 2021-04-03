@@ -6,19 +6,16 @@ const putData=(URL,data)=>{
       return res.data
     })
     .catch(err => {
-      console.log(err.message);
-      // return err
+      return err
     })
 }
 
 export const addUpvote = async (data) => {
   const res=putData('/api/complains/addUpvote',data)
   return res
-  
 }
 
 export const addAction=async(data,id)=>{
   const res=putData(`/api/complains/addAction/${id}`,data)
   return res
-
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment'
-import { Card, CardContent, Typography, CardHeader, makeStyles } from '@material-ui/core';
+import { Card, CardContent, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   complainInfo: {
@@ -34,32 +34,22 @@ const ShowComplaint = (props) => {
           Registered On:
         {moment(props.complainDetails.regDate).calendar()}
         </Typography>
-
         <Typography component="p" className={classes.complainInfo}>
           Approximate Location:
-    
-
         </Typography>
         <ol>
-      {props.complainDetails.address.map((loc,ind)=>{
-        return  <li>
-          <div>
-          {loc.location}
-          </div>
-          <div>
-            Distance:
-          {loc.distance}
-          </div>
-          
-        </li>
-      })}
-          
-             
-          
-        
-
+            {props.complainDetails.address.map((loc,ind)=>{
+              return  <li key={ind}>
+                          <div>
+                              {loc.location}
+                          </div>
+                          <div>
+                              Distance:
+                              {loc.distance}
+                          </div>                 
+                      </li>
+            })}
         </ol>
-
       </CardContent>
     </Card>
   );

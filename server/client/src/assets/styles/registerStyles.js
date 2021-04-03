@@ -10,9 +10,9 @@ export  const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(2),
   },
   button:{
-    margin:'20px'
+    margin:'1.2rem'
   },
   form:{
-    paddingTop:'20px'
+    paddingTop:'1.2rem'
   }
 }))

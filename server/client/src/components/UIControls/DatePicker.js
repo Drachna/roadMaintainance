@@ -9,7 +9,6 @@ function DatePicker(props) {
     target: {
       name, value
     }
-
   })
 
   return (

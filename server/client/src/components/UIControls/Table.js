@@ -1,34 +1,7 @@
 import React, { useState } from 'react';
-import { makeStyles, Table, TableHead, TableRow, TableCell, TableSortLabel, TablePagination } from '@material-ui/core'
+import { useStyles } from '../../assets/styles/tableStyles'
+import { Table, TableHead, TableRow, TableCell, TableSortLabel, TablePagination } from '@material-ui/core'
 
-
-const useStyles = makeStyles(theme => ({
-  table: {
-    // marginTop: theme.spacing(3),
-    '& thead th': {
-      fontWeight: '600',
-      color: 'white',
-      backgroundColor: 'black',
-    },
-    '& .MuiTableSortLabel-root:hover': {
-      color: '#967573',
-      cursor: 'pointer',
-    },
-    '& tbody td': {
-      fontWeight: '300',
-    },
-//     '&.MuiTableSortLabel-icon':{
-// color:'blue'
-//     },
-    '& .MuiTableSortLabel-active ': {
-      color: '#967573'
-    },
-    '& tbody tr:hover': {
-      backgroundColor: '#fffbf2',
-      cursor: 'pointer',
-    },
-  },
-}))
 
 const useTable = (records, headCellls, filterFn) => {
   const classes = useStyles()
@@ -65,7 +38,6 @@ const useTable = (records, headCellls, filterFn) => {
               </TableSortLabel>
             </TableCell>
           ))}
-
         </TableRow>
       </TableHead>)
   }
@@ -89,7 +61,6 @@ const useTable = (records, headCellls, filterFn) => {
       onChangePage={handleChangePage}
       onChangeRowsPerPage={handleChangeRowsPerPage}
     >
-
     </TablePagination>
   )
   function stableSort(array, comparator) {
@@ -117,8 +88,6 @@ const useTable = (records, headCellls, filterFn) => {
     return 0;
   }
   const recordsAfterPagingAndSorting = () => {
-    // console.log(order,orderBy,stableSort(records, getComparator(order, orderBy)).slice(page * rowsPerPage, (page + 1) * rowsPerPage));
-
     return stableSort(filterFn.fn(records), getComparator(order, orderBy)).slice(page * rowsPerPage, (page + 1) * rowsPerPage)
   }
 
@@ -128,8 +97,6 @@ const useTable = (records, headCellls, filterFn) => {
     TablePagenations,
     recordsAfterPagingAndSorting
   }
-
-
 };
 
 export default useTable;

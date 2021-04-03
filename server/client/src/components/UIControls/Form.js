@@ -1,19 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core'
+import { useStyles } from '../../assets/styles/formStyles'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    // border: '1px solid #ccc',
-    // borderRadius:'13px',
-     
-    '& .MuiFormControl-root':{
-      width:'80%',
-      margin:'10px',
-     
-    }
-    // padding:'4px'
-  }
-}))
 
 export function useForms(initialFieldValues) {
 
@@ -34,9 +21,7 @@ export function useForms(initialFieldValues) {
     setErrors,
     handleChange
   }
-
 }
-
 
 export function Form(props) {
   const classes = useStyles()

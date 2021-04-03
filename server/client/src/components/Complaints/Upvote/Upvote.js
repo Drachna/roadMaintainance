@@ -1,18 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { TextField, Button } from '@material-ui/core'
-import { Form, useForms } from '../../Controls/Form'
-import { Controls } from '../../Controls/Controls'
+import { Button } from '@material-ui/core'
+import { Form, useForms } from '../../UIControls/Form'
+import { Controls } from '../../UIControls/Controls'
 import { addUpvote } from '../../../Services/Api/putMethodCalls'
-import axios from 'axios'
 import { ComplainContext } from '../../../Contexts/Complains/complainsContext';
 import { fetchAllComplains } from '../../../Services/Api/getMethodCalls';
+import { FETCH_ALL_COMPLAINS } from '../../../Reducers/actionTypes'
 
 const initialFieldValues = {
   email: ''
 }
 
 const Upvote = (props) => {
-  // const [email, setEmail] = useState('')
   const { values, setValues, errors, setErrors, handleChange } = useForms(initialFieldValues)
   const { dispatchComplains } = useContext(ComplainContext)
   const { setOpenPopUp, editComplaint } = props
@@ -27,38 +26,38 @@ const Upvote = (props) => {
   }
 
   const handleClick = async () => {
-    // props.addUpvote(email)
-
     if (validate()) {
-
       const data = {
         _id: editComplaint._id,
         email: values.email
       }
-      const add = await addUpvote(data)
+      await addUpvote(data)
       const allComplains = await fetchAllComplains()
-      if (allComplains)
-        dispatchComplains({ type: 'FETCH_ALL_COMPLAINS', payload: allComplains })
-      setOpenPopUp(false)
+      if (allComplains) {
+        dispatchComplains({ type: FETCH_ALL_COMPLAINS, payload: allComplains })
+        setOpenPopUp(false)
+      }
     }
   }
   return (
     <Form>
-      <Controls.Input
-        name="email"
-        label="Email"
-        value={values.email}
-        onChange={handleChange}
-        error={errors.email}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ marginLeft: '8px' }}
-        onClick={handleClick}
-      >
-        Upvote
-    </Button>
+      <div style={{ margin: '10px' }}>
+        <Controls.Input
+          name="email"
+          label="Email"
+          value={values.email}
+          onChange={handleChange}
+          error={errors.email}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginLeft: '8px' }}
+          onClick={handleClick}
+        >
+          Upvote
+       </Button>
+      </div>
     </Form>
   );
 };

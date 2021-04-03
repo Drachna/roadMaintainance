@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { Button, Grid } from '@material-ui/core'
-import { Form, useForms } from '../Controls/Form'
-import { Controls } from '../Controls/Controls'
+import { Form, useForms } from '../UIControls/Form'
+import { Controls } from '../UIControls/Controls'
 import { AuthContext } from '../../Contexts/Authentication/AuthContext';
 import { register } from '../../Services/Api/postMethodCalls';
-import Header from '../Home/Header';
-import { roleOptions, regionOptions, departmentOptions } from './fieldOptions'
-import { useStyles } from './styles'
-
+import Header from '../Layouts/Header/Header';
+import { roleOptions, regionOptions, departmentOptions } from '../../assets/data/optionArrays'
+import { useStyles } from '../../assets/styles/registerStyles'
+import { LOGIN } from '../../Reducers/actionTypes'
+import Notification from '../UIControls/Notification';
 
 
 const initialFieldValues = {
@@ -23,6 +24,7 @@ const initialFieldValues = {
 
 const Register = (props) => {
   const { values, setValues, errors, setErrors, handleChange } = useForms(initialFieldValues)
+  const [notify, setNotify] = useState({ isOpen: false, message: '', type: '' })
   const { authDetails, dispatchAuthDetails } = useContext(AuthContext)
   const classes = useStyles()
 
@@ -41,24 +43,29 @@ const Register = (props) => {
   }
   const handleuSbmit = async () => {
     if (validate()) {
-      const user_status = await register(values)
-      dispatchAuthDetails({ type: 'LOGIN', payload: user_status })
-      props.history.push('/viewComplains')
+      register(values).then(res => {
+        if (res.response) {
+          setNotify({
+            isOpen: true,
+            message: res.response.data.message,
+            type: 'error'
+          })
+        }
+        else {
+          dispatchAuthDetails({ type: LOGIN, payload: res.status })
+          props.history.push('/viewComplains')
+        }
+      })
     }
-
   }
 
   return (
     <>
       <div className={classes.root}>
-
         <Grid container direction='column'>
-
           <Grid item>
-            <Header title="REGISTER OFFICER"/>
+            <Header title="REGISTER OFFICER" />
           </Grid>
-
-
           <Grid item className={classes.form}>
             <Form>
               <Controls.Input
@@ -83,7 +90,6 @@ const Register = (props) => {
                 error={errors.password}
                 type="password"
               />
-
               <Controls.Select
                 name="region"
                 value={values.region}
@@ -99,7 +105,6 @@ const Register = (props) => {
                 onChange={handleChange}
                 options={roleOptions}
               />
-
               <Controls.Select
                 name="department"
                 value={values.department}
@@ -118,8 +123,8 @@ const Register = (props) => {
                 Register
               </Button>
             </Form>
+            <Notification notify={notify} setNotify={setNotify}></Notification>
           </Grid>
-
         </Grid>
       </div>
     </>

@@ -1,5 +1,7 @@
 .App {
   /* text-align: center; */
+   
+  
 }
 
 .App-logo {
@@ -53,8 +55,6 @@ body{
       margin: 40px;
       display: flex;
       flex-wrap: wrap;
-    
-
     }
 
     .sidebarStyle {
@@ -105,4 +105,45 @@ body{
     bottom: 0;
     width: 100%;
     height: 100%;
+      }
+  
+      @media (max-width: 767px) {
+    html{
+      font-size: 55%;
+    }
+      }
+
+      @media only screen and (max-width: 600px) {
+        html{
+          font-size: 45%;
+        }
+      }
+
+      /* Small devices (portrait tablets and large phones, 600px and up) */
+      @media only screen and (min-width: 600px) {
+        html{
+          font-size: 65%;
+        }
+      }
+      
+      /* Medium devices (landscape tablets, 768px and up) */
+      @media only screen and (min-width: 768px) {
+        html{
+          font-size: 75%;
+        }
+      }
+      
+      /* Large devices (laptops/desktops, 992px and up) */
+      @media only screen and (min-width: 992px) {
+        html{
+          font-size: 85%;
+        }
+
+      }
+      
+      /* Extra large devices (large laptops and desktops, 1200px and up) */
+      @media only screen and (min-width: 1200px) {
+        html{
+          font-size: 95%;
+        }
       }

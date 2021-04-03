@@ -1,23 +1,13 @@
 import React from 'react';
-import { Dialog, DialogTitle, DialogContent, Typography, makeStyles, IconButton } from '@material-ui/core'
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Typography,
+  IconButton
+} from '@material-ui/core'
 import { GrClose } from "react-icons/gr";
-
-const useStyles = makeStyles(theme => ({
-  dialogTitle: {
-    background: 'black'
-  },
-  titleDiv: {
-    display: 'flex',
-    alignItems: 'center',
-    color: 'white'
-  },
-  title: {
-    flexGrow: 1
-  },
-  closeIcon: {
-    background: 'white'
-  }
-}))
+import { useStyles } from '../../assets/styles/popUpStyles'
 
 
 function PopUp(props) {
