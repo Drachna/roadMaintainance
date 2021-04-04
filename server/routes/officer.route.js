@@ -1,6 +1,6 @@
 const router=require('express').Router()
 const officerController=require('../controllers/officerController')
-const {officerValidator,officerLoginValidator}=require('../middlewares/validatorMiddlewares/requestBodyValidator/officerValidator')
+const {officerValidator,officerLoginValidator}=require('../utils/schemaValidators/officerValidator')
 const authMiddleware =require('../middlewares/authMiddlewares/authMiddleware')
 const { validationResultCheck } = require('../middlewares/validatorMiddlewares/validationResultCheck')
 

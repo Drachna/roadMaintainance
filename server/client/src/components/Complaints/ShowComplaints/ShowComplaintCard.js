@@ -32,7 +32,7 @@ const ShowComplaint = (props) => {
         </Typography>
         <Typography component="p" className={classes.complainInfo}>
           Registered On:
-        {moment(props.complainDetails.regDate).calendar()}
+        {moment(props.complainDetails.regDate).format("DD/MM/YYYY")}
         </Typography>
         <Typography component="p" className={classes.complainInfo}>
           Approximate Location:

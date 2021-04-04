@@ -7,6 +7,7 @@ import Register from './components/Register/Register'
 import ShowComplaintsTable from './components/Complaints/ShowComplaints/ShowComplaintsTable'
 import ComplainContextProvider from './Contexts/Complains/complainsContext'
 import AuthContextProvider from './Contexts/Authentication/AuthContext'
+
 function App() {
   return (
     <div className="App">

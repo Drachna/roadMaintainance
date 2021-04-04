@@ -25,20 +25,20 @@ class Map extends Component {
       lat: 15.21,
       zoom: 14
     }
-    console.log(this.props.coordinates);
+    // console.log(this.props.coordinates);
     if (this.props.coordinates){
       this.state=this.props.coordinates
     }
     else{
       this.state=this.initialState
     }
-    console.log(this.state);
+    // console.log(this.state);
   }
 
 
   componentDidMount() {
     // navigator.geolocation.getCurrentPosition(this.successLocation, this.erroorLocation, { enableHighAccuracy: true })
-    console.log(this.state);
+    // console.log(this.state);
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -83,7 +83,7 @@ class Map extends Component {
     }
     marker.on('dragend', onDragEnd);
 
-    console.log(map);
+    // console.log(map);
     // var coordinates = document.getElementById('coordinates');
   }
    successLocation = (position) => {

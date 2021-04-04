@@ -20,7 +20,16 @@ export const useStyles = makeStyles(theme => ({
     overflow: 'auto'
   },
   card: {
+    borderRadius: '1.3rem'
+  },
+  gridItem: {
     border: 'solid',
-    borderRadius: '0.8rem'
-  }
+    borderRadius: '0.5rem',
+    borderTopRightRadius:'1.5rem',
+    borderTopLeftRadius:'1.5rem'
+  },
+  actionHistory: {
+    border: 'solid',
+    borderRadius: '1.5rem'
+  },
 }))

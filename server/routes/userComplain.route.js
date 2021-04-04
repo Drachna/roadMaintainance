@@ -1,10 +1,10 @@
 const router=require('express').Router()
 const userComplainController=require('../controllers/userComplainController')
-const {complaintValidator,upVoteValidator}=require('../middlewares/validatorMiddlewares/requestBodyValidator/complaintValidator')
+const {complaintValidator,upVoteValidator}=require('../utils/schemaValidators/complaintValidator')
 const authMiddleware=require('../middlewares/authMiddlewares/authMiddleware')
 const { validationResultCheck } = require('../middlewares/validatorMiddlewares/validationResultCheck')
 const { imageFileValidator } = require('../middlewares/validatorMiddlewares/imageFileValidator')
-const { actionValidato } = require('../middlewares/validatorMiddlewares/requestBodyValidator/actionValidator')
+const { actionValidato } = require('../utils/schemaValidators/actionValidator')
 
 
 

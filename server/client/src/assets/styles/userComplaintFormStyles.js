@@ -9,6 +9,7 @@ export const useStyles = makeStyles(theme => ({
 
   },
   formArea: {
+    marginTop:'0.8rem',
     justifyContent: 'center',
     alignItems: 'center', 
     borderRadius: '1.3rem'

@@ -21,16 +21,18 @@ function ProvideUpdate(props) {
 
   return (
     <>
-      <Header title={authState === 'NOT_LOGGED_IN' ? 'View Details' : 'Take Action'}></Header>
+      <Header title={authState === 'NOT_LOGGED_IN' ? 'VIEW DETAILS' : 'TAKE ACTION'}></Header>
+
       <Grid container className={classes.root} spacing={3}>
-        <Grid item container spacing={3}>
-          <Grid item md={6} sm={6} >
-            <Paper className={classes.card}>
+        <Grid item container >
+          <Grid item lg={6} md={6} xs={12}>
+            <Paper className={classes.gridItem}>
+            <Header title="COMPLAINT DETAILS" />
               <ShowComplaint complainDetails={complainDetails} />
             </Paper>
           </Grid>
-          <Grid item md={6}>
-            <Map coordinates={coordinates} />
+          <Grid item  md={6} xs={12} style={{height:'480px'}}>
+            <Map  coordinates={coordinates} />
           </Grid>
         </Grid>
       </Grid>
@@ -38,24 +40,22 @@ function ProvideUpdate(props) {
         {authState === 'NOT_LOGGED_IN' ? null :
           <Grid
             align="center"
-            item md={5}>
+            item md={6} xs={12}>
             <Paper className={classes.card}>
-              <h1>Take Action</h1>
               <ProvideUpdateForm id={complainDetails._id} />
             </Paper>
           </Grid>
         }
 
-        <Grid item md={5}>
+        <Grid item md={6} xs={12}>
           <Grid  >
-            <Paper align="left" className={classes.card}>
-              <h3>Action history</h3>
+            <Paper align="left" className={classes.actionHistory}>
+              <Header title="ACTION HISTORY" />
               <ComplainHistory actionHistory={complainDetails.ActionArray}></ComplainHistory>
             </Paper>
           </Grid>
         </Grid>
       </Grid>
-
     </>
   );
 }

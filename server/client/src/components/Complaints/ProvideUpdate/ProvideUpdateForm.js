@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core'
 import {addAction} from '../../../Services/Api/putMethodCalls'
 import { useHistory } from "react-router-dom";
 import {priorityOptions,statusOptions} from '../../../assets/data/optionArrays'
+import Header from '../../Layouts/Header/Header';
 
 const initialFieldValues = {
   actionDescription: '',
@@ -22,6 +23,7 @@ const ProvideUpdateForm = (props) => {
 
   return (
     <Form>
+       <Header title="PROVIDE UPDATE" />
       <Controls.Input
         name="actionDescription"
         label="Action Taken"
@@ -43,7 +45,7 @@ const ProvideUpdateForm = (props) => {
         options={priorityOptions}
       />
       <br></br>
-      <Button onClick={handleClick} variant="contained" color="primary">
+      <Button onClick={handleClick} variant="contained" color="primary" style={{marginBottom:'10px'}}>
         Update
       </Button>
     </Form>
